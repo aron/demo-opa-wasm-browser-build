@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@open-policy-agent/opa-wasm": "^1.5.0"
+  },
+  "// browser": {
+    "util": "./util-shim"
+  }
+}

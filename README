@@ -1,0 +1,27 @@
+Demo OPA WASM Browser Build
+======================
+
+To test the bundle.js build run a local webserver:
+
+    % python3 -m http.server 9000
+
+Then open the browser to http://localhost:9000/ and open the console. You
+should see an array containing an {result: ["hello world"]}.
+
+To manually generate the bundle you'll need node, npm & esbuild installed.
+
+To install the dependencies run:
+
+    % npm install
+
+The file node_modules/@open-policy-agent/opa-wasm/src/opa.js will need to be
+patched with the following implementation https://gist.github.com/aron/41eac08e8f1469a1c8139766524d3bad
+which will expose the global TextEncoder and TextDecoder functions.
+
+A browser build can then be created using a tool of choice e.g. rollup, webpack
+or esbuild. And ensuring the `global` object is aliased to `window`.
+
+An example of how to do this with esbuild:
+
+    % brew install esbuild
+    % esbuild index.js --define:global=window --bundle >! bundle.js
